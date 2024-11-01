@@ -59,12 +59,12 @@
 </div>
 <footer th:replace="~{common/footer :: footer}"></footer>
 
-
 <div id="cboxOverlay" class="cboxOverlay"></div>
 <div id="colorbox" class="colorbox">
     <button id="cboxClose" class="cboxClose">Close</button>
     <iframe id="movieTrailer"
-            th:src="'https://www.youtube.com/embed/' + ${#strings.substring(movie.trailerUrl, movie.trailerUrl.indexOf('=') + 1)} + '?enablejsapi=1'"
+            th:src="'https://www.youtube.com/embed/'
+            + ${#strings.substring(movie.trailerUrl, movie.trailerUrl.indexOf('=') + 1)} + '?enablejsapi=1'"
             allow="autoplay; encrypted-media"
             allowfullscreen>
     </iframe>
