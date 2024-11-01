@@ -4,6 +4,7 @@ import com.example.theater.entities.AppUser;
 import com.example.theater.DTOs.RegisterDTO;
 import com.example.theater.repositories.AppUserRepository;
 import com.example.theater.repositories.BookedSeatRepository;
+import com.example.theater.repositories.MovieRepository;
 import com.example.theater.services.MailSenderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +39,8 @@ public class AccountController {
     private MailSenderService mailSenderService;
 
     private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool( 1 );
+    @Autowired
+    private MovieRepository movieRepository;
 
     @GetMapping ( "/register" )
     public String register ( Model model ) {

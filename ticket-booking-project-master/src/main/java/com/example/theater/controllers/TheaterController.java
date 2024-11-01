@@ -29,9 +29,10 @@ public class TheaterController {
 
     @GetMapping ( "/search" )
     public String search ( @RequestParam ( "keyword" ) String keyword, Model model ) {
+        String keyword_search = keyword.toLowerCase().trim().replaceAll("\\s+"," ");
         model.addAttribute( "keyword", keyword );
-        model.addAttribute( "nowShowingMovieList", movieRepository.getAllMoviesByKeyWordAndNowShowing( keyword, true ) );
-        model.addAttribute( "comingSoonMovieList", movieRepository.getAllMoviesByKeyWordAndNowShowing( keyword, false ) );
+        model.addAttribute( "nowShowingMovieList", movieRepository.getAllMoviesByKeyWordAndNowShowing( keyword_search, true ) );
+        model.addAttribute( "comingSoonMovieList", movieRepository.getAllMoviesByKeyWordAndNowShowing( keyword_search, false ) );
         return "search";
     }
 

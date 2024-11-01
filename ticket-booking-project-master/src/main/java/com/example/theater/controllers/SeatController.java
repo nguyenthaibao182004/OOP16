@@ -118,7 +118,7 @@ public class SeatController {
         return "booking";
     }
 
-    @PostMapping ( "/select" )
+    @GetMapping ( "/select" )
     public String index ( @RequestParam ( "title" ) String title, @RequestParam ( "localTime" ) String localTime, @RequestParam ( "localDate" ) String localDate, Model model ) {
         errorReport = "";
         movieTitle = title;
@@ -143,7 +143,7 @@ public class SeatController {
         return "booking";
     }
 
-    @PostMapping ( "/bill" )
+    @GetMapping ( "/bill" )
     public String bookSeat ( @RequestParam ( value = "selectedSeats", required = false ) List < Integer > selectedSeats, @RequestParam ( "title" ) String title, Model model ) {
         if ( selectedSeats == null || selectedSeats.isEmpty() ) {
             errorReport = "Vui lòng chọn ghế.";

@@ -1,6 +1,7 @@
 package com.example.theater.repositories;
 
 import com.example.theater.entities.BookedSeat;
+import com.example.theater.entities.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +17,6 @@ public interface BookedSeatRepository extends JpaRepository < BookedSeat, Long >
     boolean existsBySeatNoAndMovieTitleAndTimeAndDate ( int seatNo, String movieTitle, String time, String date );
 
     BookedSeat findById ( long id );
+
+
 }
