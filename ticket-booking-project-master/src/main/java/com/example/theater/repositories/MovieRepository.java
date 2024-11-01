@@ -15,9 +15,11 @@ public interface MovieRepository extends JpaRepository < Movie, Long > {
             "director REGEXP CONCAT('\\\\b', :keyword, '\\\\b') OR " +
             "genre REGEXP CONCAT('\\\\b', :keyword, '\\\\b') OR " +
             "actors REGEXP CONCAT('\\\\b', :keyword, '\\\\b') OR " +
-            "language REGEXP CONCAT('\\\\b', :keyword, '\\\\b')) " +
+            "language REGEXP CONCAT('\\\\b', :keyword, '\\\\b') OR " +
+            "keyword REGEXP CONCAT('\\\\b', :keyword, '\\\\b')) " +
             "AND now_showing = :nowShowing",
             nativeQuery = true)
+
 
     List<Movie> getAllMoviesByKeyWordAndNowShowing(String keyword, boolean nowShowing);
 

@@ -73,7 +73,10 @@
                             </form>
                         </div>
                         <div sec:authorize = "!isAuthenticated()">
-                            <a class = "nav-link text-white" href = "/login" sec:authorize = "!isAuthenticated()" style = "padding-right: 20px">Đăng nhập / Đăng ký</a>
+                            <div style="display: flex;">
+                                <a class="nav-link text-white" href="/login" sec:authorize="!isAuthenticated()" style="padding-right: 20px;">Đăng nhập</a>
+                                <a class="nav-link text-white" href="/register" sec:authorize="!isAuthenticated()" style="padding-right: 20px;">Đăng ký</a>
+                            </div>
                         </div>
                     </div>
                 </div>
