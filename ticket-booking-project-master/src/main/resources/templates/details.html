@@ -61,34 +61,37 @@
 
 
 <div id="cboxOverlay" class="cboxOverlay"></div>
-
-
 <div id="colorbox" class="colorbox">
     <button id="cboxClose" class="cboxClose">Close</button>
-    <iframe id="movieTrailer" width="640" height="360"
-            th:src="'https://www.youtube.com/embed/' + ${#strings.substring(movie.trailerUrl, movie.trailerUrl.indexOf('=') + 1)}"
-            frameborder="0"
+    <iframe id="movieTrailer"
+            th:src="'https://www.youtube.com/embed/' + ${#strings.substring(movie.trailerUrl, movie.trailerUrl.indexOf('=') + 1)} + '?enablejsapi=1'"
             allow="autoplay; encrypted-media"
             allowfullscreen>
     </iframe>
 </div>
 
 <script>
+    const videoElement = document.getElementById('movieTrailer');
+    let isVideoOpen = false;
+
     document.getElementById('showTrailerBtn').addEventListener('click', function(event) {
         event.preventDefault();
         document.getElementById('cboxOverlay').style.display = 'block';
         document.getElementById('colorbox').style.display = 'block';
+        videoElement.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        isVideoOpen = true;
     });
 
-    document.getElementById('cboxClose').addEventListener('click', function() {
-        document.getElementById('cboxOverlay').style.display = 'none';
-        document.getElementById('colorbox').style.display = 'none';
-    });
-
-    document.getElementById('cboxOverlay').addEventListener('click', function() {
-        document.getElementById('cboxOverlay').style.display = 'none';
-        document.getElementById('colorbox').style.display = 'none';
-    });
+    function closeVideo() {
+        if (isVideoOpen) {
+            videoElement.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+            document.getElementById('cboxOverlay').style.display = 'none';
+            document.getElementById('colorbox').style.display = 'none';
+            isVideoOpen = false;
+        }
+    }
+    document.getElementById('cboxClose').addEventListener('click', closeVideo);
+    document.getElementById('cboxOverlay').addEventListener('click', closeVideo);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
